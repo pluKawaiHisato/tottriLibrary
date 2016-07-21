@@ -10,15 +10,14 @@ public class BookDto {
 
 	private String bookName;
 	private String authorKanaByte;
-		private String authorName;
+	private String authorName;
 
 	private String publisher;
 	private Date rentalTime;
 
-	private int isbn;
-
-	private int shelfId;
-	private int documentId;
+	private String isbn;
+	private String shelfId;
+	private String documentId;
 	private int libraryId;
 	private int status;
 
@@ -64,22 +63,23 @@ public class BookDto {
 	public void setRentalTime(Date rentalTime) {
 		this.rentalTime = rentalTime;
 	}
-	public int getIsbn() {
+
+	public String getIsbn() {
 		return isbn;
 	}
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	public int getShelfId() {
+	public String getShelfId() {
 		return shelfId;
 	}
-	public void setShelfId(int shelfId) {
+	public void setShelfId(String shelfId) {
 		this.shelfId = shelfId;
 	}
-	public int getDocumentId() {
+	public String getDocumentId() {
 		return documentId;
 	}
-	public void setDocumentId(int documentId) {
+	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
 	}
 	public int getLibraryId() {

@@ -65,30 +65,6 @@ public class BookForm {
 		this.rentalTime = rentalTime;
 	}
 
-	public int getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
-	}
-
-	public int getShelfId() {
-		return shelfId;
-	}
-	public void setShelfId(int shelfId) {
-		this.shelfId = shelfId;
-	}
-
-	public int getDocumentId() {
-		return documentId;
-	}
-	public void setDocumentId(int documentId) {
-		this.documentId = documentId;
-	}
-
-	public int getLibraryId() {
-		return libraryId;
-	}
 	public void setLibraryId(int libraryId) {
 		this.libraryId = libraryId;
 	}
@@ -99,4 +75,26 @@ public class BookForm {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public int getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
+	}
+	public int getShelfId() {
+		return shelfId;
+	}
+	public void setShelfId(int shelfId) {
+		this.shelfId = shelfId;
+	}
+	public int getDocumentId() {
+		return documentId;
+	}
+	public void setDocumentId(int documentId) {
+		this.documentId = documentId;
+	}
+	public int getLibraryId() {
+		return libraryId;
+	}
+
 }

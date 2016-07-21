@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +11,9 @@
 <title>管理者検索結果</title>
 </head>
 <body>
-
+<h1>検索一覧</h1>
+<form:form modelAttribute="searchForm" method="GET" action="manageConfilme" >
+<a href="reserveBook"><button >検索画面</button></a>
 <table border="" cellpadding="13" align="center">
 	<thead>
 		<tr>
@@ -28,25 +31,26 @@
 
 	<tbody align="center">
 
-		<c:forEach items="${bokList}" var="book">
+		<c:forEach items="${searchedList}" var="search">
 			<tr>
 
-				<td><c:out value="${book.bookName}" /></td>
-				<td><c:out value="${book.authorName}" /></td>
-				<td><c:out value="${book.publisher}" /></td>
-				<td><c:out value="${book.documentId}" /></td>
-				<td><c:out value="${book.shelfId}" /></td>
-				<td><c:out value="${book.status}" /></td>
-				<td><c:out value="${book.bookId}" /></td>
-				<td><form:form modelAttribute="BookForm" >
-				    <form:checkboxes path="book" items="${book.bookId}"  />
-				    </form:form></td>
+				<td><c:out value="${search.bookName}" /></td>
+				<td><c:out value="${search.authorName}" /></td>
+				<td><c:out value="${search.publisher}" /></td>
+				<td><c:out value="${search.documentName}" /></td>
+				<td><c:out value="${search.shelfId}" /></td>
+				<td><c:out value="${search.statusName}" /></td>
+				<td><c:out value="${search.bookId}" /></td>
+				<!--  <td><form:checkboxes path="" items="${searchedList}" itemValue="${search.bookId}"  />
+				    </td>-->
 
     		</tr>
 		</c:forEach>
 	</tbody>
 </table>
 
+ <input type="submit" value = "予約確認">
+ </form:form>
 
 </body>
 </html>

@@ -2,32 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="library.mapper.ReserveMapper">
-	<resultMap id="ReserveResult" type="library.entity.Book">
-        <result column="book_id" property="bookId" />
-        <result column="book_kanaByte" property="bookKanaByte" />
+	<resultMap id="ReserveResult" type="library.entity.Search">
+       <!--   <result column="book_id" property="bookId" />
         <result column="book_name" property="bookName" />
-        <result column="author_kanaByte" property="authorKanaByte" />
         <result column="author_name" property="authorName" />
         <result column="publisher" property="publisher" />
         <result column="isbn" property="isbn" />
-        <result column="shelf_id" property="shelfId" />
-        <result column="library_id" property="libraryId" />
-        <result column="status_id" property="status" />
 
+        <result column="library_name" property="libraryName" />
+        <result column="status_name" property="statusName" />
+        <result column="document_name" property="documentName" />-->
+        <result column="shelf_id" property="shelfId" />
     </resultMap>
+
+    <resultMap id="DocumentResult" type="library.dto.DocumentDto">
+        <result column="document_id" property="documentId" />
+        <result column="document_name" property="documentName" />
+    </resultMap>
+
     <select id="getSearchedBook" resultMap="ReserveResult">
-        SELECT book.book_id, book.book_name, book.author_name, book.publisher, book.document_id, book.shelf_id,
-        book.status_id
-        FROM library.book
-        WHERE 1
-        <if test="bookKanaByte != null">
-        AND book_kanaByte like #{bookKanaByte}
-        </if>
-        <if test="bookName != null">
+        SELECT *
+        FROM library.search
+        <where>
+       <if test="bookName != null">
         AND book_name like #{bookName}
-        </if>
-        <if test="authorKanaByte != null">
-        AND author_kanaByte like #{authorKanaByte}
         </if>
         <if test="authorName != null">
         AND author_name like #{authorName}
@@ -35,14 +33,28 @@
         <if test="publisher != null">
         AND publisher like #{publisher}
         </if>
-        <if test="isbn != 0">
+        <if test="isbn != null">
         AND isbn like #{isbn}
         </if>
-        <if test="documentId != 0">
-        AND document_id like #{documentId}
+        <if test="documentName != null">
+        AND document_name like #{documentName}
         </if>
-        <if test="shelfId != 0">
+        <if test="shelfId != null">
         AND shelf_id like #{shelfId}
         </if>
+        </where>
     </select>
+
+    <select id="documentName" resultMap="DocumentResult">
+		SELECT * FROM library ;
+	</select>
+
+ 	<select id="getCheckBook" resultMap="ReserveResult">
+		SELECT * FROM search WHERE book_id in
+		<foreach  item="checkedList" index="index" collection="bookId" open="(" separator="," close=")">
+			#{bookId}
+		</foreach>
+	</select>
+
+
 </mapper>

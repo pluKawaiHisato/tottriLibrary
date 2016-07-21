@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import library.dto.LibraryDto;
 import library.dto.ManageDto;
@@ -17,6 +18,7 @@ import library.form.ManageForm;
 import library.service.ManageService;
 
 @Controller
+@SessionAttributes("loginManager")
 public class ManageController {
 	@Autowired
     private ManageService manageService;
@@ -32,7 +34,6 @@ public class ManageController {
 	@RequestMapping(value = "/manageLogin", method = RequestMethod.POST)
 	public String manageLogin(@Valid @ModelAttribute ManageForm form, BindingResult result, Model model){
 		if (result.hasErrors()) {
-		System.out.println(result.hasErrors());
 			model.addAttribute("message", "ログインできませんでした");
 			model.addAttribute("ManageForm", form);
 			return "/manageLogin";

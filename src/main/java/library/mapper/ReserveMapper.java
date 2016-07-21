@@ -2,10 +2,15 @@ package library.mapper;
 
 import java.util.List;
 
-import library.entity.Book;
+import library.dto.DocumentDto;
+import library.dto.SearchDto;
+import library.entity.Search;
 
 public interface ReserveMapper {
 
-	List<Book> getSearchedBook();
+	List<Search> getSearchedBook(SearchDto dto);
 
+	List<DocumentDto> documentName();
+
+	List<Search> getCheckBook(SearchDto dto);
 }

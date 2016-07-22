@@ -3,15 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="library.mapper.ReserveMapper">
 	<resultMap id="ReserveResult" type="library.entity.Search">
-       <!--   <result column="book_id" property="bookId" />
+        <result column="book_id" property="bookId" />
         <result column="book_name" property="bookName" />
+        <result column="isbn" property="isbn" />
         <result column="author_name" property="authorName" />
         <result column="publisher" property="publisher" />
-        <result column="isbn" property="isbn" />
+
 
         <result column="library_name" property="libraryName" />
         <result column="status_name" property="statusName" />
-        <result column="document_name" property="documentName" />-->
+        <result column="document_name" property="documentName" />
         <result column="shelf_id" property="shelfId" />
     </resultMap>
 
@@ -23,7 +24,7 @@
     <select id="getSearchedBook" resultMap="ReserveResult">
         SELECT *
         FROM library.search
-        <where>
+     <!--     <where>
        <if test="bookName != null">
         AND book_name like #{bookName}
         </if>
@@ -39,10 +40,10 @@
         <if test="documentName != null">
         AND document_name like #{documentName}
         </if>
-        <if test="shelfId != null">
+        <if test="shelfId != 0">
         AND shelf_id like #{shelfId}
         </if>
-        </where>
+        </where>-->
     </select>
 
     <select id="documentName" resultMap="DocumentResult">

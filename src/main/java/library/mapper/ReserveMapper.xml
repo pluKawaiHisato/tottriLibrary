@@ -8,8 +8,7 @@
         <result column="isbn" property="isbn" />
         <result column="author_name" property="authorName" />
         <result column="publisher" property="publisher" />
-
-
+        <result column="library_id" property="libraryId" />
         <result column="library_name" property="libraryName" />
         <result column="status_name" property="statusName" />
         <result column="document_name" property="documentName" />
@@ -21,10 +20,11 @@
         <result column="document_name" property="documentName" />
     </resultMap>
 
+
     <select id="getSearchedBook" resultMap="ReserveResult">
         SELECT *
         FROM library.search
-     <!--     <where>
+      <where>
        <if test="bookName != null">
         AND book_name like #{bookName}
         </if>
@@ -40,22 +40,24 @@
         <if test="documentName != null">
         AND document_name like #{documentName}
         </if>
-        <if test="shelfId != 0">
+        <if test="shelfId != null">
         AND shelf_id like #{shelfId}
         </if>
-        </where>-->
+        </where>
     </select>
 
     <select id="documentName" resultMap="DocumentResult">
-		SELECT * FROM library ;
+		SELECT * FROM document ;
 	</select>
 
  	<select id="getCheckBook" resultMap="ReserveResult">
-		SELECT * FROM search WHERE book_id in
-		<foreach  item="checkedList" index="index" collection="bookId" open="(" separator="," close=")">
-			#{bookId}
-		</foreach>
+		SELECT * FROM search WHERE book_id = #{bookId}
 	</select>
+
+	<insert id="reserveInsert">
+	INSERT INTO library.reserve (user_id, isbn, book_id, library_id)
+	 VALUES (#{userId}, #{isbn}, #{bookId}, #{libraryId}) ;
+	</insert>
 
 
 </mapper>

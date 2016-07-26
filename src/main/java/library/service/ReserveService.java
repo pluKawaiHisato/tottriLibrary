@@ -1,5 +1,6 @@
 package library.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import library.dto.DocumentDto;
+import library.dto.ReserveDto;
 import library.dto.SearchDto;
 import library.entity.Search;
+import library.form.SearchForm;
 import library.mapper.ReserveMapper;
 
 @Service
@@ -19,11 +22,8 @@ public class ReserveService {
 	private ReserveMapper reserveMapper;
 
 	public List<SearchDto> getSearchedBook(SearchDto dto){
-		System.out.println(dto.getShelfId());
-
 		List<Search> searchedList = reserveMapper.getSearchedBook(dto);
 		List<SearchDto> resultList = convertToDto(searchedList);
-		System.out.println(dto.getShelfId());
 		return resultList;
 	}
 
@@ -42,9 +42,14 @@ public class ReserveService {
 		return documentName;
 	}
 
-	public List<SearchDto> getCheckBook(SearchDto dto) {
+	public List<SearchDto> getCheckBook(SearchForm searchForm) {
+		List<Search> checkList = new ArrayList<Search>();
+		for (int i = 0; i < searchForm.getBookId().length ; i++){
+			SearchDto dto = new SearchDto();
+			dto.setBookId(searchForm.getBookId()[i]);
+			checkList.addAll(reserveMapper.getCheckBook(dto));
+		}
 
-	    List<Search> checkList = reserveMapper.getCheckBook(dto);
 	    List<SearchDto> resultList = convertToDtoCeack(checkList);
 	    return resultList;
 	}
@@ -58,6 +63,18 @@ public class ReserveService {
 		}
 		return resultList;
 	}
+
+	public  void reserveInsert(ReserveDto dto, List<SearchDto> checkedList){
+		for(SearchDto check : checkedList){
+		dto.setIsbn(check.getIsbn());
+		dto.setBookId(check.getBookId());
+		dto.setLibraryId(check.getLibraryId());
+		reserveMapper.reserveInsert(dto);
+		}
+
+	}
+
+
 
 
 }

@@ -3,6 +3,7 @@ package library.mapper;
 import java.util.List;
 
 import library.dto.DocumentDto;
+import library.dto.ReserveDto;
 import library.dto.SearchDto;
 import library.entity.Search;
 
@@ -13,4 +14,6 @@ public interface ReserveMapper {
 	List<DocumentDto> documentName();
 
 	List<Search> getCheckBook(SearchDto dto);
+
+	void reserveInsert(ReserveDto dto);
 }

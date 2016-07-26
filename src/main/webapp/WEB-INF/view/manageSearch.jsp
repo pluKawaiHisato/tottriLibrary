@@ -12,9 +12,9 @@
 </head>
 <body>
 <h1>検索一覧</h1>
-<form:form modelAttribute="searchForm" method="GET" action="manageConfilme" >
 <a href="reserveBook"><button >検索画面</button></a>
-<table border="" cellpadding="13" align="center">
+<form:form modelAttribute="searchedList" method="GET" action="manageConfilme" >
+<table border="3" cellpadding="13" align="center">
 	<thead>
 		<tr>
 			<th>書名</th>
@@ -41,8 +41,7 @@
 				<td><c:out value="${search.shelfId}" /></td>
 				<td><c:out value="${search.statusName}" /></td>
 				<td><c:out value="${search.bookId}" /></td>
-				<!--  <td><form:checkboxes path="" items="${searchedList}" itemValue="${search.bookId}"  />
-				    </td>-->
+				<td><input type="checkbox" name="bookId" value="${search.bookId}"></td>
 
     		</tr>
 		</c:forEach>
@@ -50,7 +49,7 @@
 </table>
 
  <input type="submit" value = "予約確認">
- </form:form>
+</form:form>
 
 </body>
 </html>

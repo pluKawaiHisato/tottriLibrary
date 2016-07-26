@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,8 +11,9 @@
 <title>予約確認</title>
 </head>
 <body>
-<form:form modelAttribute="searchForm">
-ユーザーID：<input name = "UserId"/><br>
+
+
+
 <br />
 <table border="" cellpadding="13" align="center">
 	<thead>
@@ -44,8 +45,10 @@
 	</tbody>
 </table>
 
- <input type="submit" value = "予約確認">
- </form:form>
+<form:form modelAttribute="reserveForm">
+ユーザーID：<input name = "userId"/><br>
+<input type="submit" value = "予約">
+</form:form>
  <a href = "manageSearch">キャンセル</a>
 </body>
 </html>

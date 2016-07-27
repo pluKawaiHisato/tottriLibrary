@@ -47,6 +47,7 @@ public class ReserveController {
 	public String searchedBookList(@ModelAttribute BookForm form, Model model){
 		SearchDto dto = new SearchDto();
 		BeanUtils.copyProperties(form, dto);
+
 		if(dto.getBookName() == null && dto.getAuthorName() == null && dto.getPublisher() == null && dto.getIsbn() == null
 			 && dto.getShelfId() == null && dto.getDocumentId().equals("null")){
 			List<DocumentDto> documentName = reserveService.documentName();
@@ -55,9 +56,8 @@ public class ReserveController {
 			return "reserveBook";
 		}else{
 			List<SearchDto> searchedList = reserveService.getSearchedBook(dto);
+			SearchDto.setSearchDto(searchedList);
 			model.addAttribute("searchedList", searchedList);
-			SearchForm searchForm = new SearchForm();
-			model.addAttribute("bookId",searchForm);
 			return "manageSearch";
 		}
 
@@ -65,25 +65,57 @@ public class ReserveController {
 
 	@RequestMapping(value = "/manageConfilme", method = RequestMethod.GET )
 	public String checkedList(@ModelAttribute SearchForm searchForm, Model model){
-
-		List<SearchDto> checkedList = reserveService.getCheckBook(searchForm);
-		SearchDto.setSearchDto(checkedList);
-		model.addAttribute("checkedList", checkedList);
-		//ReserveForm reserveForm  = new ReserveForm();
-		//model.addAttribute("userId", reserveForm);
-		return "manageConfilme";
+		if(searchForm.getBookId() == null){
+			model.addAttribute("errorMessage", "予約する書籍にチェックを入れてください");
+			List<SearchDto> searchedList = SearchDto.getSearchDto();
+			model.addAttribute("searchedList", searchedList);
+			return "manageSearch";
+		}else {
+			List<SearchDto> checkedList = reserveService.getCheckBook(searchForm);
+			SearchDto.setSearchDto(checkedList);
+			model.addAttribute("checkedList", checkedList);
+			return "manageConfilme";
+		}
 	}
 
 	@RequestMapping(value = "/manageConfilme", method = RequestMethod.POST)
-	public String reserve(@ModelAttribute ReserveForm reserveForm, Model model){
+	public String reserve(@ModelAttribute ReserveForm reserveForm, SearchDto searchDto, Model model){
 		List<SearchDto> checkedList = SearchDto.getSearchDto();
+
 
 		ReserveDto dto = new ReserveDto();
 		BeanUtils.copyProperties(reserveForm, dto);
 
-		reserveService.reserveInsert(dto, checkedList);
 
-		return "redirect:reserveBook";
+		if(dto.getUserId() == null){
+			SearchDto.setSearchDto(checkedList);
+			model.addAttribute("checkedList", checkedList);
+			model.addAttribute("errorMessage", "ユーザーIDを入力してください");
+			return "manageConfilme";
+		}
+		List<String> reserveUser = reserveService.checkUser(dto);
+
+		 if(reserveUser.size() == 0){
+			SearchDto.setSearchDto(checkedList);
+			model.addAttribute("checkedList", checkedList);
+			model.addAttribute("errorMessage", "存在しないユーザーIDです");
+			return "manageConfilme";
+		}else{
+			List<ReserveDto> reservedBook = reserveService.reservedBook(dto,checkedList);
+			System.out.println(reservedBook.size());
+
+			if(reservedBook.size() != 0){
+				SearchDto.setSearchDto(checkedList);
+				model.addAttribute("checkedList", checkedList);
+				model.addAttribute("errorMessage", "すでに予約された図書が含まれています");
+				model.addAttribute("reserveBook", reservedBook);
+
+				return "manageConfilme";
+			}else{
+				reserveService.reserveInsert(dto, checkedList);
+				return "redirect:reserveBook";
+			}
+		}
 	}
 
 

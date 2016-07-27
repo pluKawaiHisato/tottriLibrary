@@ -7,6 +7,7 @@ public class ReserveDto {
 	private int count;
 	private int libraryId;
 	private int bookId;
+	private String bookName;
 
 	public String getUserId() {
 		return userId;
@@ -38,5 +39,12 @@ public class ReserveDto {
 	public void setBookId(int bookId) {
 		this.bookId = bookId;
 	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
 
 }

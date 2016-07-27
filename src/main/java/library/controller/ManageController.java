@@ -38,7 +38,6 @@ public class ManageController {
 			model.addAttribute("ManageForm", form);
 			return "/manageLogin";
 		} else {
-			System.out.println(result.hasErrors());
 			ManageDto dto = new ManageDto();
 			BeanUtils.copyProperties(form, dto);
 			manageService.getManager(dto);

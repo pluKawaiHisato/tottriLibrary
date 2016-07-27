@@ -9,8 +9,8 @@
 <title>予約</title>
 </head>
 <body>
+	<h1> 予約検索 </h1>
     <h3>${errorMessage}</h3>
-    <br />
     <h2>検索条件</h2>
 
     <form:form modelAttribute="bookForm" method="GET" action="manageSearch" >

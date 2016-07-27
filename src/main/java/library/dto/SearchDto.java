@@ -102,6 +102,10 @@ public class SearchDto implements Serializable {
 	public void setLibraryName(String libraryName) {
 		this.libraryName = libraryName;
 	}
+	public static void setSearch1Dto(List<SearchDto> checkedList) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
 
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import library.dto.DocumentDto;
 import library.dto.ReserveDto;
 import library.dto.SearchDto;
+import library.entity.Reserve;
 import library.entity.Search;
 import library.form.SearchForm;
 import library.mapper.ReserveMapper;
@@ -64,6 +65,11 @@ public class ReserveService {
 		return resultList;
 	}
 
+	public List<String> checkUser(ReserveDto dto) {
+		List<String> userId = reserveMapper.checkUser(dto);
+		return userId;
+	}
+
 	public  void reserveInsert(ReserveDto dto, List<SearchDto> checkedList){
 		for(SearchDto check : checkedList){
 		dto.setIsbn(check.getIsbn());
@@ -74,7 +80,30 @@ public class ReserveService {
 
 	}
 
+	public List<ReserveDto> reservedBook(ReserveDto dto, List<SearchDto> checkedList) {
+		List<Reserve> bookName = new ArrayList<Reserve>();
+		for(SearchDto check : checkedList){
+			dto.setIsbn(check.getIsbn());
+			dto.setBookName(check.getBookName());
+			System.out.println(dto.getBookName());
+			bookName.addAll(reserveMapper.reservedBook(dto));
 
+			System.out.println(bookName);
 
+		}
+		//System.out.println(bookName.size());
+		List<ReserveDto> resultList = convertToDtoReserved(bookName);
+		return resultList;
+	}
+
+	private List<ReserveDto> convertToDtoReserved(List<Reserve> bookName) {
+		List<ReserveDto> resultList = new LinkedList<ReserveDto>();
+		for (Reserve entity : bookName) {
+			ReserveDto dto = new ReserveDto();
+			BeanUtils.copyProperties(entity, dto);
+			resultList.add(dto);
+		}
+		return resultList;
+	}
 
 }

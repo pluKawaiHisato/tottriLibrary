@@ -20,6 +20,12 @@
         <result column="document_name" property="documentName" />
     </resultMap>
 
+    <resultMap type="library.entity.Reserve" id="CheckUserResult">
+    	<result column="user_id" property="userId"/>
+    	<result column="isbn" property="isbn"/>
+    	<result column="book_name" property="bookName"/>
+    </resultMap>
+
 
     <select id="getSearchedBook" resultMap="ReserveResult">
         SELECT *
@@ -54,10 +60,19 @@
 		SELECT * FROM search WHERE book_id = #{bookId}
 	</select>
 
+
+
+	<select id="checkUser" resultMap="CheckUserResult">
+		SELECT user_id FROM user WHERE user_id = #{userId}
+	</select>
+
 	<insert id="reserveInsert">
 	INSERT INTO library.reserve (user_id, isbn, book_id, library_id)
 	 VALUES (#{userId}, #{isbn}, #{bookId}, #{libraryId}) ;
 	</insert>
 
-
+	<select id="reservedBook" resultMap="CheckUserResult">
+		SELECT book_name FROM mypage_reserve WHERE user_id = #{userId} AND book_name = #{bookName} AND
+		isbn = #{isbn}
+	</select>
 </mapper>

@@ -12,6 +12,8 @@
 </head>
 <body>
 <h1>検索一覧</h1>
+<h3>${errorMessage}</h3>
+    <br />
 <a href="reserveBook"><button >検索画面</button></a>
 <form:form modelAttribute="searchedList" method="GET" action="manageConfilme" >
 <table border="3" cellpadding="13" align="center">

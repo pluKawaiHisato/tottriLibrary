@@ -32,19 +32,19 @@
         FROM library.search
       <where>
        <if test="bookName != null">
-        AND book_name like #{bookName}
+        AND book_name like '%${bookName}%'
         </if>
         <if test="authorName != null">
-        AND author_name like #{authorName}
+        AND author_name like '%${authorName}%'
         </if>
         <if test="publisher != null">
-        AND publisher like #{publisher}
+        AND publisher like '%${publisher}%'
         </if>
         <if test="isbn != null">
-        AND isbn like #{isbn}
+        AND isbn like '%${isbn}%'
         </if>
         <if test="documentName != null">
-        AND document_name like #{documentName}
+        AND document_name like '%${documentName}%'
         </if>
         <if test="shelfId != null">
         AND shelf_id like #{shelfId}

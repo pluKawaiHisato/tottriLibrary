@@ -85,13 +85,8 @@ public class ReserveService {
 		for(SearchDto check : checkedList){
 			dto.setIsbn(check.getIsbn());
 			dto.setBookName(check.getBookName());
-			System.out.println(dto.getBookName());
 			bookName.addAll(reserveMapper.reservedBook(dto));
-
-			System.out.println(bookName);
-
 		}
-		//System.out.println(bookName.size());
 		List<ReserveDto> resultList = convertToDtoReserved(bookName);
 		return resultList;
 	}

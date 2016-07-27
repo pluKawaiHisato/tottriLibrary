@@ -54,7 +54,12 @@ public class ReserveController {
 			model.addAttribute("Document", documentName);
 			model.addAttribute("errorMessage", "検索条件を入力してください");
 			return "reserveBook";
-		}else{
+		}else if(dto.getIsbn().matches("-.*") || dto.getShelfId().matches("-.*")){
+			List<DocumentDto> documentName = reserveService.documentName();
+			model.addAttribute("Document", documentName);
+			model.addAttribute("errorMessage", "ISBNと棚番号に\"-\"は使用できません");
+			return "reserveBook";
+		} else {
 			List<SearchDto> searchedList = reserveService.getSearchedBook(dto);
 			SearchDto.setSearchDto(searchedList);
 			model.addAttribute("searchedList", searchedList);
@@ -117,9 +122,5 @@ public class ReserveController {
 			}
 		}
 	}
-
-
-
-
 
 }

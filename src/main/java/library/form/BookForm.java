@@ -2,6 +2,9 @@ package library.form;
 
 import java.util.Date;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 public class BookForm {
 	private int bookId;
 	private String bookKanaByte;
@@ -10,7 +13,11 @@ public class BookForm {
 	private String authorName;
 	private String publisher;
 	private Date rentalTime;
+	@Size(max = 13 , message = "ISBNは13桁以内で入力してください")
+	@Min(value =1, message = "ISBNは1以上で入力してください")
 	private String isbn;
+	@Size(max = 3 , message = "棚番号は3桁以内で入力してください")
+	@Min(value=1, message = "棚番号は1以上で入力してください" )
 	private String shelfId;
 	private String documentId;
 	private int libraryId;

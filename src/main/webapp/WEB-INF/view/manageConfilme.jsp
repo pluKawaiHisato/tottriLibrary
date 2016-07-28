@@ -44,17 +44,29 @@
 		</c:forEach>
 	</tbody>
 </table>
+
 <h3>${errorMessage}</h3>
 <h3>${message}</h3>
 <c:forEach items="${reserveBook}" var="reserveBook">
 	<c:out value="${reserveBook.bookName}" /><br />
 </c:forEach>
 <form:form modelAttribute="reserveForm">
+<div><form:errors path="*"  /></div>
 <br />
 ユーザーID：<input name = "userId"/><br>
 <input type="submit" value = "予約">
 </form:form>
 <br />
-<a href = "reserveBook">キャンセル</a>
+<form action="manageConfilme" method="post">
+<input type="submit" name="cancel" value="キャンセル">
+</form>
+
+<script language="JavaScript">
+function func(MyCommand){
+	document.MyForm.MySubmit.value=MyCommand;
+	document.MyForm.submit();
+}
+</script>
+
 </body>
 </html>

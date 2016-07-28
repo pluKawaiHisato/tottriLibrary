@@ -2,6 +2,7 @@ package library.mapper;
 
 import java.util.List;
 
+import library.dto.CheckDto;
 import library.dto.DocumentDto;
 import library.dto.ReserveDto;
 import library.dto.SearchDto;
@@ -14,7 +15,7 @@ public interface ReserveMapper {
 
 	List<DocumentDto> documentName();
 
-	List<Search> getCheckBook(SearchDto dto);
+	List<Search> getCheckBook(CheckDto dto);
 
 	List<String> checkUser(ReserveDto dto);
 

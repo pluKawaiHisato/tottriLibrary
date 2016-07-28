@@ -22,6 +22,7 @@
 			<th>書名</th>
 			<th>著者名</th>
 			<th>出版社名</th>
+			<th>ISBN</th>
 			<th>書類種類</th>
 			<th>棚番号</th>
 			<th>貸出状況</th>
@@ -39,6 +40,7 @@
 				<td><c:out value="${search.bookName}" /></td>
 				<td><c:out value="${search.authorName}" /></td>
 				<td><c:out value="${search.publisher}" /></td>
+				<td><c:out value="${search.isbn}" /></td>
 				<td><c:out value="${search.documentName}" /></td>
 				<td><c:out value="${search.shelfId}" /></td>
 				<td><c:out value="${search.statusName}" /></td>
@@ -52,6 +54,7 @@
 
  <input type="submit" value = "予約確認">
 </form:form>
+
 
 </body>
 </html>

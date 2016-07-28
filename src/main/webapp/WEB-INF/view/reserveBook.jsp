@@ -11,9 +11,10 @@
 <body>
 	<h1> 予約検索 </h1>
     <h3>${errorMessage}</h3>
-    <h2>検索条件</h2>
 
-    <form:form modelAttribute="bookForm" method="GET" action="manageSearch" >
+<form:form modelAttribute="bookForm" method="GET" action="manageSearch" >
+    <div><form:errors path="*"  /></div>
+     <h2>検索条件</h2>
          書名：<input name = "bookName"/><br>
         著者名：<input name = "authorName"/><br>
         出版社名：<input name = "publisher"/><br>

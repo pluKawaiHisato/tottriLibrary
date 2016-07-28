@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import library.dto.CheckDto;
 import library.dto.DocumentDto;
 import library.dto.ReserveDto;
 import library.dto.SearchDto;
@@ -42,23 +43,22 @@ public class ReserveService {
 		List<DocumentDto> documentName = reserveMapper.documentName();
 		return documentName;
 	}
-
-	public List<SearchDto> getCheckBook(SearchForm searchForm) {
+	public List<CheckDto> getCheckBook(SearchForm searchForm) {
 		List<Search> checkList = new ArrayList<Search>();
 		for (int i = 0; i < searchForm.getBookId().length ; i++){
-			SearchDto dto = new SearchDto();
+			CheckDto dto = new CheckDto();
 			dto.setBookId(searchForm.getBookId()[i]);
 			checkList.addAll(reserveMapper.getCheckBook(dto));
 		}
 
-	    List<SearchDto> resultList = convertToDtoCeack(checkList);
+	    List<CheckDto> resultList = convertToDtoCeack(checkList);
 	    return resultList;
 	}
 
-	private List<SearchDto> convertToDtoCeack(List<Search> checkList) {
-		List<SearchDto> resultList = new LinkedList<SearchDto>();
+	private List<CheckDto> convertToDtoCeack(List<Search> checkList) {
+		List<CheckDto> resultList = new LinkedList<CheckDto>();
 		for (Search entity : checkList) {
-			SearchDto dto = new SearchDto();
+			CheckDto dto = new CheckDto();
 			BeanUtils.copyProperties(entity, dto);
 			resultList.add(dto);
 		}
@@ -70,8 +70,8 @@ public class ReserveService {
 		return userId;
 	}
 
-	public  void reserveInsert(ReserveDto dto, List<SearchDto> checkedList){
-		for(SearchDto check : checkedList){
+	public  void reserveInsert(ReserveDto dto, List<CheckDto> checkedList){
+		for(CheckDto check : checkedList){
 		dto.setIsbn(check.getIsbn());
 		dto.setBookId(check.getBookId());
 		dto.setLibraryId(check.getLibraryId());
@@ -80,9 +80,9 @@ public class ReserveService {
 
 	}
 
-	public List<ReserveDto> reservedBook(ReserveDto dto, List<SearchDto> checkedList) {
+	public List<ReserveDto> reservedBook(ReserveDto dto, List<CheckDto> checkedList) {
 		List<Reserve> bookName = new ArrayList<Reserve>();
-		for(SearchDto check : checkedList){
+		for(CheckDto check : checkedList){
 			dto.setIsbn(check.getIsbn());
 			dto.setBookName(check.getBookName());
 			bookName.addAll(reserveMapper.reservedBook(dto));

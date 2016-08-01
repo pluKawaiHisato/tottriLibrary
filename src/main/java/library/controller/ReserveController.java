@@ -122,6 +122,7 @@ public class ReserveController {
 				model.addAttribute("errorMessage", "すでに予約されている図書が含まれています");
 				model.addAttribute("message", "予約されている図書");
 				model.addAttribute("reserveBook", reservedBook);
+				model.addAttribute("deleteMessage", "以上の図書を予約リストから削除しますか");
 
 				return "manageConfilme";
 			}else{
@@ -133,9 +134,7 @@ public class ReserveController {
 	@RequestMapping(value = "/manageConfilme",params = "cancel", method = RequestMethod.POST)
 	public String cancel(@ModelAttribute SearchDto dto, Model model){
 		List<SearchDto> searchedList = SearchDto.getSearchDto();
-		List<CheckDto> checkedList = CheckDto.getCheckDto();
  		model.addAttribute("searchedList", searchedList);
- 		model.addAttribute("checkedList", checkedList);
 		return "manageSearch";
 	}
 }

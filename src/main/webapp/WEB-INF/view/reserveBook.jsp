@@ -31,5 +31,6 @@
 
         <input type="submit" value = "検索">
     </form:form>
+    <a href="home"><button >ホーム</button></a>
 </body>
 </html>

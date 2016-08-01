@@ -33,22 +33,30 @@ public class ManageController {
 
 	@RequestMapping(value = "/manageLogin", method = RequestMethod.POST)
 	public String manageLogin(@Valid @ModelAttribute ManageForm form, BindingResult result, Model model){
+
 		if (result.hasErrors()) {
 			model.addAttribute("message", "ログインできませんでした");
 			model.addAttribute("ManageForm", form);
-			return "/manageLogin";
-		} else {
+			return "manageLogin";
+		}else{
 			ManageDto dto = new ManageDto();
 			BeanUtils.copyProperties(form, dto);
-			manageService.getManager(dto);
+			ManageDto loginUser = manageService.getManager(dto);
+
+			if (loginUser == null) {
+				model.addAttribute("message", "ログインできませんでした");
+				model.addAttribute("ManageForm", form);
+				return "manageLogin";
+			} else {
+				return "redirect:home";
+			}
 		}
-		return "redirect:home";
 	}
 
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home(Model model){
 		LibraryDto dto = new LibraryDto();
-		//ManageService.getLibrary(libraryId);
+
 		model.addAttribute("LibraryName", dto);
 		return "home";
 	}

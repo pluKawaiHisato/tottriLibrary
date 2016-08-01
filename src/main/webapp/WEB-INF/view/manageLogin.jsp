@@ -12,15 +12,12 @@
 
 <div class="login-form">
 
-<p>
-    <c:out value="${message}"></c:out>
-</p>
-
-<div><form:errors path="*"  /></div>
+<p><c:out value="${message}"></c:out></p>
 
  <form:form modelAttribute="ManageForm">
+  <div><form:errors path="*"  /></div>
 	<label for="loginId">ログインID</label><br />
-	<input name="loginId" value="${loginManager.loginId}" id="loginId"/> <br />
+	<input type= "number" name="loginId" value="${loginManager.loginId}" id="loginId"/> <br />
 	<br />
 	<br />
 

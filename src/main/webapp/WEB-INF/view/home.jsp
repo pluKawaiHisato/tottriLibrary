@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>${LibraryName.libraryName}</h2>
-	<a href="logout"><button >ログアウト</button></a>
+	<a href="manageLogin"><button >ログアウト</button></a>
 	<br /><br />
 	<a href="lendBook"><button >貸出</button></a>
 	<a href="returnBook"><button >返却</button></a>

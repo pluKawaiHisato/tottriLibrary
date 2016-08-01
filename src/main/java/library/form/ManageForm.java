@@ -1,11 +1,15 @@
 package library.form;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class ManageForm {
 	@NotNull
+	@Size(max = 3)
+	@Min(value=1)
 	private int loginId;
 	@NotEmpty
 	private String password;
